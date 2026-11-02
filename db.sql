@@ -1,0 +1,4 @@
+CREATE TABLE todo (
+    id SERIAL PRIMARY KEY,
+    data TEXT NOT NULL
+);

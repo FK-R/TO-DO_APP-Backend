@@ -1,0 +1,22 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    container_name: postgres-dev
+    environment:
+      POSTGRES_PASSWORD: password123
+      POSTGRES_USER: user123
+      POSTGRES_DB: db123
+    volumes:
+      # Mounts the local script directly into the database container's init folder
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+  app:
+    build: .
+    command: npm run dev
+    container_name: myapp-dev
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://user123:password123@db:5432/db123
+    ports:
+      - "8000:8000"
