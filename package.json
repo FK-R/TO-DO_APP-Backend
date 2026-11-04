@@ -2,18 +2,34 @@
   "name": "to-do-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "dev": "node app.js"
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2",
-    "pg": "^8.10.0",
-    "cors": "^2.8.6"
-  }
+    "@prisma/adapter-pg": "^7.10.1",
+    "@prisma/client": "^7.10.1",
+    "cors": "^2.8.6",
+    "express": "^4.22.3",
+    "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "dotenv": "^16.6.1",
+    "nodemon": "^1.19.4",
+    "prisma": "^7.10.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FK-R/TO-DO_APP-Backend.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/FK-R/TO-DO_APP-Backend/issues"
+  },
+  "homepage": "https://github.com/FK-R/TO-DO_APP-Backend#readme"
 }

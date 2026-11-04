@@ -1,22 +1,32 @@
-version: "3"
+version: "3.8"
+
 services:
-  db:
-    image: postgres
-    container_name: postgres-dev
+  postgres:
+    image: postgres:15-alpine
     environment:
-      POSTGRES_PASSWORD: password123
-      POSTGRES_USER: user123
-      POSTGRES_DB: db123
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: product_db
+    ports:
+      - "5432:5432"
     volumes:
-      # Mounts the local script directly into the database container's init folder
-      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d product_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   app:
     build: .
-    command: npm run dev
-    container_name: myapp-dev
-    depends_on:
-      - db
-    environment:
-      DATABASE_URL: postgres://user123:password123@db:5432/db123
     ports:
-      - "8000:8000"
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - DATABASE_URL=postgresql://postgres:secretpassword@postgres:5432/product_db?schema=public
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pgdata:

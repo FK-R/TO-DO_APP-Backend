@@ -1,0 +1,18 @@
+datasource db {
+    provider = "postgresql"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Todo {
+    // Creates a primary key field
+    id          String  @id @default(uuid()) // or Int @id @default(autoincrement())
+    title       String
+    description String?
+    date        String?
+
+    // This is table name
+    @@map("todo")
+}

@@ -1,10 +1,11 @@
-FROM node:16
-COPY db.sql /docker-entrypoint-initdb.d/
-WORKDIR /usr/src/app
+FROM node:20-alpine
+WORKDIR /app
 
 COPY package*.json ./
+COPY prisma ./prisma/
+
 RUN npm install
 
 COPY . .
 
-CMD ["npm", "run", "dev"]
+CMD npx prisma migrate deploy && npm run start
