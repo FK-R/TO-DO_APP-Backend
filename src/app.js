@@ -1,8 +1,10 @@
-const express = require("express");
-const taskRoutes = require("./modules/task/task.routes");
-const productRoutes = require("./modules/product/product.routes");
-const cors = require("cors");
+import express from "express";
+import taskRoutes from "./modules/task/task.routes.js";
+import productRoutes from "./modules/product/product.routes.js";
+import cors from "cors";
+
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -14,4 +16,4 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-module.exports = app;
+export default app;

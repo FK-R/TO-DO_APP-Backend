@@ -10,7 +10,7 @@ model Todo {
   id          String  @id @default(uuid()) // or Int @id @default(autoincrement())
   title       String
   description String?
-  date        String?
+  date        String
 
   @@map("todo")
 }

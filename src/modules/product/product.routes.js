@@ -1,11 +1,12 @@
-const express = require("express");
-const router = express.Router();
-const productController = require("./product.controller");
-const validate = require("../../middlewares/validate.middleware");
-const {
+import { Router } from "express";
+import productController from "./product.controller.js";
+import { validate } from "../../middlewares/validate.middleware.js";
+import {
   createProductSchema,
-  createUpdateSchema,
-} = require("../product/product.validator");
+  updateProductSchema,
+} from "./product.validator.js";
+
+const router = Router();
 
 router.post(
   "/add-product",
@@ -14,7 +15,11 @@ router.post(
 );
 router.get("/get-product/:id", productController.findUnique);
 router.get("/get-products", productController.findMany);
-router.put("/update-product/:id", productController.update);
+router.put(
+  "/update-product/:id",
+  validate(updateProductSchema),
+  productController.update,
+);
 router.delete("/delete-product/:id", productController.delete);
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const prisma = require("../../config/prisma");
+import prisma from "../../config/prisma.js";
 
 class TaskService {
   async createTask(data) {
@@ -39,4 +39,4 @@ class TaskService {
   }
 }
 
-module.exports = new TaskService();
+export default new TaskService();

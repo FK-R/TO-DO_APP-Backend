@@ -1,4 +1,4 @@
-const prisma = require("../../config/prisma");
+import prisma from "../../config/prisma.js";
 
 class ProductService {
   async createProduct(data) {
@@ -37,4 +37,4 @@ class ProductService {
   }
 }
 
-module.exports = new ProductService();
+export default new ProductService();
