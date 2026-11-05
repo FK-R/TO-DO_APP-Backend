@@ -16,7 +16,8 @@
     "@prisma/client": "^7.10.1",
     "cors": "^2.8.6",
     "express": "^4.22.3",
-    "pg": "^8.23.1"
+    "pg": "^8.23.1",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "dotenv": "^16.6.1",
@@ -27,7 +28,7 @@
     "type": "git",
     "url": "git+https://github.com/FK-R/TO-DO_APP-Backend.git"
   },
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/FK-R/TO-DO_APP-Backend/issues"
   },

@@ -1,18 +1,25 @@
 datasource db {
-    provider = "postgresql"
+  provider = "postgresql"
 }
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 model Todo {
-    // Creates a primary key field
-    id          String  @id @default(uuid()) // or Int @id @default(autoincrement())
-    title       String
-    description String?
-    date        String?
+  id          String  @id @default(uuid()) // or Int @id @default(autoincrement())
+  title       String
+  description String?
+  date        String?
 
-    // This is table name
-    @@map("todo")
+  @@map("todo")
+}
+
+model Product {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+  price       Decimal @db.Decimal(10, 2)
+
+  @@map("product")
 }
