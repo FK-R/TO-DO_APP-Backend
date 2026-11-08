@@ -4,14 +4,15 @@ class ProductController {
   async create(req, res) {
     try {
       const { name, description, price } = req.body;
-      if (!name) {
-        return res.status(400).json({ error: "Name can not be empty" });
-      }
-      const product = await productService.createProduct({
-        name,
-        description,
-        price,
-      });
+      const file = req.file;
+      const product = await productService.createProduct(
+        {
+          name,
+          description,
+          price,
+        },
+        file,
+      );
 
       return res.status(201).json({
         success: true,

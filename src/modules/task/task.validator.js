@@ -4,7 +4,7 @@ export const createTaskSchema = z.object({
   body: z.object({
     title: z.string().min(2, "Task title must be at least 2 characters"),
     description: z.string().min(5, "Description must be at least 5 characters"),
-    date: z.string()(5, "Must be a valid date."),
+    date: z.string().min(5, "Must be a valid date."),
   }),
 });
 

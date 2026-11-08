@@ -20,6 +20,8 @@ model Product {
   name        String
   description String?
   price       Decimal @db.Decimal(10, 2)
+  imageUrl    String
+  publicId    String
 
   @@map("product")
 }

@@ -1,12 +1,35 @@
 import prisma from "../../config/prisma.js";
 
+const uploadToCloudinary = (fileBuffer) => {
+  return new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      { folder: "products" },
+      (error, result) => {
+        if (result) resolve(result);
+        else reject(error);
+      },
+    );
+    stream.end(fileBuffer);
+  });
+};
+
 class ProductService {
-  async createProduct(data) {
+  async createProduct(data, file) {
+    let imageUrl = null;
+    let publicId = null;
+
+    if (file) {
+      const uploadRes = await uploadToCloudinary(file.buffer);
+      imageUrl = uploadRes.secure_url;
+      publicId = uploadRes.public_id;
+    }
     return await prisma.product.create({
       data: {
         name: data.name,
         description: data.description,
-        price: data.price,
+        price: parseFloat(data.price),
+        imageUrl,
+        publicId,
       },
     });
   }

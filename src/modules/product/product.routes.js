@@ -10,9 +10,11 @@ const router = Router();
 
 router.post(
   "/add-product",
+  uploadImage.single("image"),
   validate(createProductSchema),
   productController.create,
 );
+
 router.get("/get-product/:id", productController.findUnique);
 router.get("/get-products", productController.findMany);
 router.put(
